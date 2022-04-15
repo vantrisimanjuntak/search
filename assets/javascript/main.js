@@ -307,4 +307,32 @@ $(document).ready(function () {
             });
         }
     }
+
+
+    const flashData = $('.flash-data').data('flashdata');
+    if (flashData) {
+        Swal.fire(
+            'Login Error',
+            'Username dan Password Kosong',
+            'error'
+        );
+    }
+    $('#buttonLogin').click(function () {
+        var username = $('[name="username"]').val();
+        var password = $('[name="password"]').val();
+        if ((username == '') && (password == '')) {
+            $('#alertPassword').css('display', 'block');
+            $('#alertUsername').css('display', 'block');
+        } else if (username == '') {
+            $('#alertUsername').css('display', 'block');
+            $('#alertPassword').css('display', 'none');
+        } else if (password == '') {
+            $('#alertUsername').css('display', 'none');
+            $('#alertPassword').css('display', 'block');
+        } else {
+            $('#alertUsername').css('display', 'none');
+            $('#alertPassword').css('display', 'none');
+            $('#formLogin').submit();
+        }
+    });
 });

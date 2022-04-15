@@ -4,10 +4,10 @@
     {
         parent::__construct();
     }
-    function login($username, $password, $timelogin, $ip_address)
+    function login($username_encrypt, $password_encrypt, $timelogin, $ip_address)
     {
-        $this->db->where('username', $username);
-        $this->db->where('password', $password);
+        $this->db->where('username', $username_encrypt);
+        $this->db->where('password', $password_encrypt);
         $queryLogin = $this->db->get('superuser');
         if ($queryLogin->num_rows() > 0) {
             foreach ($queryLogin->result_array() as $row) {

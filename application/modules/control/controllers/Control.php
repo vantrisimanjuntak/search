@@ -13,33 +13,40 @@
     function checklogin()
     {
         $data['title'] = 'Login';
-        $username = sha1($this->input->post('username'));
-        $password = sha1($this->input->post('password'));
+        $username = $this->input->post('username');
+        $username_encrypt = sha1($username);
+        $password = $this->input->post('password');
+        $password_encrypt = sha1($password);
         $ip_address = $_SERVER['REMOTE_ADDR'];
         date_default_timezone_set('Asia/Jakarta');
         $timelogin = date('Y-m-d H:i:s');
 
-        if ($username == NULL || $password == NULL) {
-            $baseurl = base_url();
-            echo "<script>
-            alert('USERNAME ATAU PASSWORD KOSONG');
-            window.location.href = '$baseurl'+'control/login';
-            </script>";
+        if ($username == '' || $password == '') {
+            $this->session->set_flashdata(
+                'failed',
+                '<div class="alert alert-danger alert-dismissible fade show" role="alert">
+                Username dan Password salah!
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>'
+            );
+            redirect('control/login');
         } else {
-            $query = $this->Control_model->login($username, $password, $ip_address);
-            if ($query) {
-                redirect('control');
+            $modelLogin = $this->Control_model->login($username_encrypt, $password_encrypt, $timelogin, $timelogin);
+            if ($modelLogin) {
+                echo "LOGIN BERHASIL";
             } else {
                 $this->session->set_flashdata(
                     'failed',
-                    '<div class="alert alert-warning alert-dismissible fade show" role="alert">
+                    '<div class="alert alert-danger alert-dismissible fade show" role="alert">
                     Username dan Password salah!
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                       <span aria-hidden="true">&times;</span>
                     </button>
                   </div>'
                 );
-                $this->load->view('control/login_control_view', $data);
+                redirect('control/login');
             }
         }
     }
