@@ -50,4 +50,25 @@
             }
         }
     }
+    function index()
+    {
+        if ($this->session->userdata('username')) {
+            $data['title'] = 'Control | Referensi Dosen Tugas Akhir';
+            $data['allImbuhan'] = $this->Control_model->getAllImbuhan();
+            $data['stopword'] = $this->Control_model->getAllStopword();
+            $data['session_access_user'] = $this->session->userdata('alias');
+            $data['countSkripsi'] = $this->db->count_all_results('tugas_akhir');
+            $data['countDosen'] = $this->db->count_all_results('dosen');
+            $data['countMhs'] = $this->db->count_all_results('mahasiswa');
+            $data['countIdx'] = $this->db->count_all_results('index');
+
+            $this->load->view('control/index', $data);
+        } else {
+            $base_url = base_url();
+            echo "<script>
+            alert('SILAHKAN LOGIN TERLEBIH DAHULU');
+            window.location.href = '$base_url'+'control/login';
+            </script>";
+        }
+    }
 }
