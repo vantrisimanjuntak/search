@@ -51,5 +51,6 @@ defined('BASEPATH') or exit('No direct script access allowed');
 */
 $route['default_controller'] = 'home/cari';
 $route['home'] = 'home/cari';
+$route['login'] = 'control/index';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
