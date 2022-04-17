@@ -35,7 +35,7 @@
         } else {
             $modelLogin = $this->Control_model->login($username_encrypt, $password_encrypt, $timelogin, $timelogin);
             if ($modelLogin) {
-                echo "LOGIN BERHASIL";
+                redirect('control/index');
             } else {
                 $this->session->set_flashdata(
                     'failed',
@@ -54,13 +54,13 @@
     {
         if ($this->session->userdata('username')) {
             $data['title'] = 'Control | Referensi Dosen Tugas Akhir';
-            $data['allImbuhan'] = $this->Control_model->getAllImbuhan();
-            $data['stopword'] = $this->Control_model->getAllStopword();
+            // $data['allImbuhan'] = $this->Control_model->getAllImbuhan();
+            // $data['stopword'] = $this->Control_model->getAllStopword();
             $data['session_access_user'] = $this->session->userdata('alias');
-            $data['countSkripsi'] = $this->db->count_all_results('tugas_akhir');
-            $data['countDosen'] = $this->db->count_all_results('dosen');
-            $data['countMhs'] = $this->db->count_all_results('mahasiswa');
-            $data['countIdx'] = $this->db->count_all_results('index');
+            // $data['countSkripsi'] = $this->db->count_all_results('tugas_akhir');
+            // $data['countDosen'] = $this->db->count_all_results('dosen');
+            // $data['countMhs'] = $this->db->count_all_results('mahasiswa');
+            // $data['countIdx'] = $this->db->count_all_results('index');
 
             $this->load->view('control/index', $data);
         } else {
