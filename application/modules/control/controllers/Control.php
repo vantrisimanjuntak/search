@@ -71,4 +71,34 @@
             </script>";
         }
     }
+    function imbuhan()
+    {
+        if ($this->session->userdata('username')) {
+            $data['title'] = 'Control | Portal Tugas Akhir';
+            $data['allImbuhan'] = $this->Control_model->getAllImbuhan();
+            $data['session_access_user'] = $this->session->userdata('alias');
+            $this->load->view('control/imbuhan', $data);
+        }
+    }
+    function addImbuhan()
+    {
+        if ($this->session->userdata('username')) {
+            $kata_imbuhan = strtolower($this->input->post('kata_imbuhan'));
+            $kata_dasar = strtolower($this->input->post('kata_dasar'));
+
+            if ($kata_dasar == NULL && $kata_imbuhan == NULL) {
+                echo "<script>
+                alert('FORM ADA YANG KOSONG');
+                window.location.href = '/spk-vsm/control/imbuhan';
+                </script>";
+            } else {
+                $input = $this->Control_model->addImbuhan($kata_imbuhan, $kata_dasar);
+                if ($input) {
+                    $this->session->set_flashdata('success', 'ditambahkan');
+                    redirect('control/imbuhan');
+                } else {
+                }
+            }
+        }
+    }
 }

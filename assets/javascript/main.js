@@ -335,4 +335,35 @@ $(document).ready(function () {
             $('#formLogin').submit();
         }
     });
+
+
+    // Halaman Kata Imbuhan
+
+    var field_kata_imbuhan = $('[name="kata_imbuhan"]');
+    var field_kata_dasar = $('[name="kata_dasar"]');
+    var btnTambahKataImbuhan = $('#buttonTambahKataImbuhan');
+    field_kata_dasar.attr('readonly', 'true');
+    btnTambahKataImbuhan.attr("disabled", true);
+
+    if (field_kata_imbuhan.keyup(function () {
+        if (field_kata_imbuhan.val() != '') {
+            btnTambahKataImbuhan.removeAttr("disabled");
+            field_kata_dasar.attr('readonly', false);
+            btnTambahKataImbuhan.click(function () {
+                formKataImbuhan.submit();
+            });
+        } else {
+            field_kata_dasar.attr('readonly', true);
+            btnTambahKataImbuhan.attr("disabled", true);
+        }
+    }));
+
+    const successKataImbuhan = $('.kata-imbuhan').data('flashdata');
+    if (successKataImbuhan) {
+        Swal.fire(
+            'Berhasil',
+            'Kata Imbuhan berhasil ditambahkan',
+            'success'
+        );
+    }
 });

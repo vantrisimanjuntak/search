@@ -30,4 +30,29 @@
             return FALSE;
         }
     }
+    function getAllImbuhan()
+    {
+        $queryGetAllImbuhan = $this->db->get('kata_imbuhan')->result_array();
+        return $queryGetAllImbuhan;
+    }
+    function addImbuhan($kata_imbuhan, $kata_dasar)
+    {
+        $this->db->select('kata_imbuhan, kata_dasar');
+        $this->db->from('kata_imbuhan');
+        $this->db->where('kata_imbuhan', $kata_imbuhan);
+        $this->db->where('kata_dasar', $kata_dasar);
+        $queryImbuhan = $this->db->get();
+
+        if ($queryImbuhan->num_rows() > 0) {
+            return FALSE;
+        } else {
+            $data = array(
+                'id' => bin2hex(random_bytes(2)),
+                'kata_imbuhan' => $kata_imbuhan,
+                'kata_dasar' => $kata_dasar
+            );
+            $this->db->insert('kata_imbuhan', $data);
+            return TRUE;
+        }
+    }
 }
