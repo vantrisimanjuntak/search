@@ -350,7 +350,20 @@ $(document).ready(function () {
             btnTambahKataImbuhan.removeAttr("disabled");
             field_kata_dasar.attr('readonly', false);
             btnTambahKataImbuhan.click(function () {
-                formKataImbuhan.submit();
+                Swal.fire({
+                    title: 'Tambah Kata Imbuhan?',
+                    text: "Apakah Anda ingin menambahkan kata imbuhan?",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Ya, tambahkan!',
+                    cancelButtonText: 'Batalkan',
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        $('#formKataImbuhan').submit();
+                    }
+                })
             });
         } else {
             field_kata_dasar.attr('readonly', true);
@@ -366,4 +379,7 @@ $(document).ready(function () {
             'success'
         );
     }
+
+
+
 });
