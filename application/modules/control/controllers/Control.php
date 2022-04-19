@@ -86,17 +86,33 @@
             $kata_imbuhan = strtolower($this->input->post('kata_imbuhan'));
             $kata_dasar = strtolower($this->input->post('kata_dasar'));
 
-            if ($kata_dasar == NULL && $kata_imbuhan == NULL) {
-                echo "<script>
-                alert('FORM ADA YANG KOSONG');
-                window.location.href = '/spk-vsm/control/imbuhan';
-                </script>";
+            if ($kata_dasar == '' || $kata_imbuhan == '') {
+                $this->session->set_flashdata(
+                    'failed',
+                    '<div class="alert alert-danger alert-dismissible fade show" role="alert">
+                   Form ada yang kosong!
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>'
+                );
+                redirect('control/imbuhan');
+            } else if ($kata_dasar == '' && $kata_imbuhan == '') {
+                $this->session->set_flashdata(
+                    'failed',
+                    '<div class="alert alert-danger alert-dismissible fade show" role="alert">
+                   Form ada yang kosong!
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>'
+                );
+                redirect('control/imbuhan');
             } else {
                 $input = $this->Control_model->addImbuhan($kata_imbuhan, $kata_dasar);
                 if ($input) {
                     $this->session->set_flashdata('success', 'ditambahkan');
                     redirect('control/imbuhan');
-                } else {
                 }
             }
         }

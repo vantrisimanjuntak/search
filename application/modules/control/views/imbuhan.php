@@ -45,11 +45,14 @@
 
     <div class="kata-imbuhan" data-flashdata="<?= $this->session->flashdata('success'); ?>"></div>
 
+
     <div id="right-panel" class="right-panel">
 
         <!-- Header-->
         <header id="header" class="header">
-
+            <div class="container" style="width: 680px;">
+                <?= $this->session->flashdata('failed'); ?>
+            </div>
             <div class="header-menu">
 
                 <div class="col-sm-7">

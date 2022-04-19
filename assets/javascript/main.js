@@ -348,7 +348,16 @@ $(document).ready(function () {
     if (field_kata_imbuhan.keyup(function () {
         if (field_kata_imbuhan.val() != '') {
             btnTambahKataImbuhan.removeAttr("disabled");
+            btnTambahKataImbuhan.attr("disabled", true);
             field_kata_dasar.attr('readonly', false);
+        } else {
+            field_kata_dasar.attr('readonly', true);
+            btnTambahKataImbuhan.attr("disabled", true);
+        }
+    }));
+    if (field_kata_dasar.keyup(function () {
+        if (field_kata_dasar.val() !== '') {
+            btnTambahKataImbuhan.removeAttr("disabled");
             btnTambahKataImbuhan.click(function () {
                 Swal.fire({
                     title: 'Tambah Kata Imbuhan?',
@@ -366,10 +375,11 @@ $(document).ready(function () {
                 })
             });
         } else {
-            field_kata_dasar.attr('readonly', true);
             btnTambahKataImbuhan.attr("disabled", true);
         }
-    }));
+    })); {
+
+    }
 
     const successKataImbuhan = $('.kata-imbuhan').data('flashdata');
     if (successKataImbuhan) {
