@@ -117,7 +117,6 @@
                     <thead>
                         <tr>
                             <th>No</th>
-                            <th>ID</th>
                             <th>Kata Imbuhan</th>
                             <th>Kata Dasar</th>
                             <th>Action</th>
@@ -130,7 +129,6 @@
                         foreach ($allImbuhan as $data) : ?>
                             <tr>
                                 <td><?= $no++; ?></td>
-                                <td id="<?= $data['id']; ?>"><?= $data['id']; ?></td>
                                 <td><?= $data['kata_imbuhan']; ?></td>
                                 <td><?= $data['kata_dasar']; ?></td>
                                 <td>
