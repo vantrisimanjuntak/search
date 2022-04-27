@@ -67,4 +67,8 @@
             return FALSE;
         }
     }
+    function getAllStopword()
+    {
+        return $this->db->get('stopwords');
+    }
 }

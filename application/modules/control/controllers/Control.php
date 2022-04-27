@@ -125,4 +125,11 @@
             redirect('control/imbuhan');
         }
     }
+    function stopwords()
+    {
+        $data['title'] = 'Control | Portal Tugas Akhir';
+        $data['allStopword'] = $this->Control_model->getAllStopword();
+        $data['session_access_user'] = $this->session->userdata('alias');
+        $this->load->view('control/stopword_v', $data);
+    }
 }

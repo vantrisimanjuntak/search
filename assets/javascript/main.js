@@ -418,6 +418,13 @@ $(document).ready(function () {
         );
     }
 
+    var stopword = $('[name="stopword"]');
+    if (stopword.val() != '') {
+        alert('TIDAK KOSONG');
+    } else {
+        alert("KOSONG");
+    }
+
 
 
 });
