@@ -10,8 +10,8 @@
 
     <link rel="shortcut icon" href="<?= base_url('assets/images/wp/stta.png') ?>" type="image/x-icon">
 
-    <script src="<?= base_url('assets/javascript/jquery-3.5.1.js') ?>" type="text/javascript"></script>
-    <script type="text/javascript" src="<?= base_url('assets/javascript/main.js'); ?>"></script>
+
+
     <!-- Bootstrap 4 CSS -->
     <link rel="stylesheet" href="<?= base_url('assets/control_template/vendors/datatables.net-bs4/css/dataTables.bootstrap4.min.css'); ?>">
     <link rel="stylesheet" href="<?= base_url('assets/control_template/vendors/datatables.net-buttons-bs4/css/buttons.bootstrap4.min.css') ?>">
@@ -44,6 +44,7 @@
 
 
     <div class="kata-imbuhan" data-flashdata="<?= $this->session->flashdata('success'); ?>"></div>
+    <div class="imbuhan-dihapus" data-flashdata="<?= $this->session->flashdata('berhasil_hapus_imbuhan'); ?>"></div>
 
 
     <div id="right-panel" class="right-panel">
@@ -116,6 +117,7 @@
                     <thead>
                         <tr>
                             <th>No</th>
+                            <th>ID</th>
                             <th>Kata Imbuhan</th>
                             <th>Kata Dasar</th>
                             <th>Action</th>
@@ -128,14 +130,13 @@
                         foreach ($allImbuhan as $data) : ?>
                             <tr>
                                 <td><?= $no++; ?></td>
+                                <td id="<?= $data['id']; ?>"><?= $data['id']; ?></td>
                                 <td><?= $data['kata_imbuhan']; ?></td>
                                 <td><?= $data['kata_dasar']; ?></td>
                                 <td>
-                                    <a href="<?= base_url('control/deleteImbuhan/' . $data['id']); ?>" style="text-decoration: none;">
-                                        <button type="button" class="btn btn-danger" data-toggle="tooltip" data-placement="top" title="Hapus">
-                                            <i class="fa fa-trash-o" aria-hidden="true"></i>
-                                        </button>
-                                    </a>
+                                    <button type="button" class="btn btn-danger hapus-imbuhan" id="<?= $data['id'] ?>" data-toggle="tooltip" data-placement="top" title="Hapus">
+                                        <i class="fa fa-trash-o" aria-hidden="true"></i>
+                                    </button>
                                 </td>
                             </tr>
                         <?php endforeach; ?>
@@ -147,7 +148,7 @@
 
     <!-- Right Panel -->
 
-
+    <script src="<?= base_url('assets/javascript/jquery-3.5.1.js') ?>" type="text/javascript"></script>
 
     <script src="<?= base_url('assets/control_template/vendors/popper.js/dist/umd/popper.min.js') ?> "></script>
     <script src="<?= base_url('assets/control_template/vendors/bootstrap/dist/js/bootstrap.min.js') ?>"></script>
@@ -190,9 +191,14 @@
             });
         })(jQuery);
     </script>
-
+    <script type="text/javascript">
+        var base_url = "<?php echo base_url(); ?>";
+    </script>
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="<?= base_url('assets/sweetalert2-11.4.8/package/dist/sweetalert2.all.min.js') ?>"></script>
+    <script type="text/javascript" src="<?= base_url('assets/javascript/main.js'); ?>"></script>
+
+
 
 </body>
 

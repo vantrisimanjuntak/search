@@ -117,4 +117,12 @@
             }
         }
     }
+    function hapusImbuhan($id)
+    {
+        $hapusImbuhan = $this->Control_model->hapusImbuhan($id);
+        if ($hapusImbuhan == TRUE) {
+            $this->session->set_flashdata('berhasil_hapus_imbuhan', ' ');
+            redirect('control/imbuhan');
+        }
+    }
 }

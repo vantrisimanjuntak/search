@@ -55,4 +55,16 @@
             return TRUE;
         }
     }
+    function hapusImbuhan($id)
+    {
+        $this->db->where('id', $id);
+        $checkImbuhan = $this->db->get('kata_imbuhan');
+        if ($checkImbuhan->num_rows() > 0) {
+            $this->db->where('id', $id);
+            $this->db->delete('kata_imbuhan');
+            return TRUE;
+        } else {
+            return FALSE;
+        }
+    }
 }

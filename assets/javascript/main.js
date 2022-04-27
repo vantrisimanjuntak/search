@@ -377,15 +377,43 @@ $(document).ready(function () {
         } else {
             btnTambahKataImbuhan.attr("disabled", true);
         }
-    })); {
-
-    }
+    }));
 
     const successKataImbuhan = $('.kata-imbuhan').data('flashdata');
     if (successKataImbuhan) {
         Swal.fire(
             'Berhasil',
             'Kata Imbuhan berhasil ditambahkan',
+            'success'
+        );
+    }
+
+
+    var btnHapusData = $('.hapus-imbuhan');
+    if (btnHapusData.click(function () {
+        var hapusId = $(this).attr("id");
+
+        Swal.fire({
+            title: 'Hapus Kata Imbuhan?',
+            text: "Apakah Anda ingin menghapus kata imbuhan?",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Ya, hapus!',
+            cancelButtonText: 'Batalkan',
+        }).then((result) => {
+            if (result.isConfirmed) {
+                window.location.href = base_url + 'control/hapusImbuhan/' + hapusId;
+            }
+        })
+    }));
+
+    const alertHapusImbuhan = $('.imbuhan-dihapus').data('flashdata');
+    if (alertHapusImbuhan) {
+        Swal.fire(
+            'Berhasil',
+            'Kata Imbuhan berhasil dihapus',
             'success'
         );
     }
