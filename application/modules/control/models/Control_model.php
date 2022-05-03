@@ -71,4 +71,33 @@
     {
         return $this->db->get('stopwords');
     }
+    function checkStopword($stopword)
+    {
+        $this->db->select('stopword');
+        $this->db->from('stopwords');
+        $this->db->where('stopword', $stopword);
+        $query = $this->db->get();
+        return $query;
+    }
+    function tambahStopword($id, $stopword)
+    {
+        $data = array(
+            'id' => $id,
+            'stopword' => $stopword
+        );
+        $this->db->insert('stopwords', $data);
+        return TRUE;
+    }
+    function hapusStopword($id)
+    {
+        $this->db->where('id', $id);
+        $checkStopword = $this->db->get('stopwords');
+        if ($checkStopword->num_rows() > 0) {
+            $this->db->where('id', $id);
+            $this->db->delete('stopwords');
+            return TRUE;
+        } else {
+            return FALSE;
+        }
+    }
 }

@@ -127,9 +127,46 @@
     }
     function stopwords()
     {
-        $data['title'] = 'Control | Portal Tugas Akhir';
-        $data['allStopword'] = $this->Control_model->getAllStopword();
-        $data['session_access_user'] = $this->session->userdata('alias');
-        $this->load->view('control/stopword_v', $data);
+        if ($this->session->userdata('username')) {
+            $data['title'] = 'Control | Portal Tugas Akhir';
+            $data['allStopword'] = $this->Control_model->getAllStopword();
+            $data['session_access_user'] = $this->session->userdata('alias');
+            $this->load->view('control/stopword_v', $data);
+        } else {
+            redirect('control/login');
+        }
+    }
+    function checkStopword()
+    {
+        $stopword = $this->input->post('stopword');
+        if ($stopword == '') {
+            echo "Stopword Kosong";
+        } else {
+            $checkStopword = $this->Control_model->checkStopword($stopword);
+            if ($checkStopword->num_rows() > 0) {
+                echo "DATA SUDAH ADA";
+                echo "<script>
+                    $('.tambah-stopword').prop('disabled', true);
+                </script>";
+            }
+        }
+    }
+    function tambahStopword()
+    {
+        $stopword = strtolower($this->input->post('stopword'));
+        $id = bin2hex(random_bytes(4));
+        $tambahStopword = $this->Control_model->tambahStopword($id, $stopword);
+        if ($tambahStopword == TRUE) {
+            $this->session->set_flashdata('berhasil_tambah_stopword', 'a');
+            redirect('control/stopwords');
+        }
+    }
+    function hapusStopword($id)
+    {
+        $hapusStopword = $this->Control_model->hapusStopword($id);
+        if ($hapusStopword == TRUE) {
+            $this->session->set_flashdata('berhasil_hapus_stopword', ' ');
+            redirect('control/stopwords');
+        }
     }
 }

@@ -27,7 +27,7 @@
 
                 <h3 class="menu-title">Utilitas</h3><!-- /.menu-title -->
                 <li>
-                    <a href="<?= base_url('control/stopword'); ?>"> <i class="menu-icon fa fa-font"></i>Stopwords</a>
+                    <a href="<?= base_url('control/stopwords'); ?>"> <i class="menu-icon fa fa-font"></i>Stopwords</a>
                 </li>
                 <li class="">
                     <a href="<?= base_url('control/imbuhan'); ?>"> <i class="menu-icon fa fa-text-width"></i>Kata Imbuhan</a>

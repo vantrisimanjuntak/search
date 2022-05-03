@@ -418,11 +418,70 @@ $(document).ready(function () {
         );
     }
 
-    var stopword = $('[name="stopword"]');
-    if (stopword.val() != '') {
-        alert('TIDAK KOSONG');
-    } else {
-        alert("KOSONG");
+    var stopword = $('#stopword');
+
+    $('.tambah-stopword').attr('disabled', true);
+    if (stopword.keyup(function () {
+        if (stopword.val() != '') {
+            $('.tambah-stopword').removeAttr('disabled');
+
+        } else {
+            $('.tambah-stopword').attr('disabled', true);
+        }
+    }));
+
+    $('#stopword').change(function () {
+        var stopword = $('#stopword').val();
+        if (stopword != '') {
+            $.ajax({
+                url: "checkStopword",
+                method: "POST",
+                data: {
+                    stopword: stopword
+                },
+                success: function (data) {
+                    $('#alertStopword').html(data);
+                },
+
+
+            });
+        }
+    });
+    const berhasilTambahStopword = $('.success_add_stopword').data('flashdata');
+    if (berhasilTambahStopword) {
+        Swal.fire(
+            'Berhasil',
+            'Stopword berhasil ditambahkan',
+            'success'
+        );
+    }
+
+    var btnHapusDataStopword = $('.hapus-stopword');
+    if (btnHapusDataStopword.click(function () {
+        var hapusId = $(this).attr("id");
+
+        Swal.fire({
+            title: 'Hapus Stopword?',
+            text: "Apakah Anda ingin menghapus kata stopword?",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Ya, hapus!',
+            cancelButtonText: 'Batalkan',
+        }).then((result) => {
+            if (result.isConfirmed) {
+                window.location.href = base_url + 'control/hapusStopword/' + hapusId;
+            }
+        })
+    }));
+    const berhasilHapusStopword = $('.success_delete_stopword').data('flashdata');
+    if (berhasilHapusStopword) {
+        Swal.fire(
+            'Berhasil',
+            'Stopword berhasil dihapus',
+            'success'
+        );
     }
 
 

@@ -24,13 +24,16 @@
     <link rel="stylesheet" href="<?= base_url('assets/control_template/assets/css/style.css') ?>">
 
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800' rel='stylesheet' type='text/css'>
+    <!-- SweetAlert2 CSS -->
+    <link rel="stylesheet" href="<?= base_url('assets/sweetalert2-11.4.8/package/dist/sweetalert2.min.css') ?>">
 
 
 </head>
 
 <body>
 
-
+    <div class="success_add_stopword" data-flashdata="<?= $this->session->flashdata('berhasil_tambah_stopword'); ?>"></div>
+    <div class="success_delete_stopword" data-flashdata="<?= $this->session->flashdata('berhasil_hapus_stopword'); ?>"></div>
     <!-- Left Panel -->
 
     <?php $this->load->view('control/side'); ?>
@@ -75,13 +78,14 @@
                 <strong class="card-title">STOPWORD</strong>
             </div>
             <div class="container-fluid mb-4 mt-3" style="font-family: 'PT Serif', serif; ">
-                <form action="<?= base_url('control/addStopword'); ?>" method="POST" enctype="multipart/form-data">
+                <form action="<?= base_url('control/tambahStopword'); ?>" method="POST">
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group row">
                                 <label for="" class="col-md-5 col-lg-4 col-xl-3 col-form-label">Stopword</label>
                                 <div class="col-md-7 col-lg-8 col-xl-7">
-                                    <input type="text" name="stopword" required id="" autocomplete="off" class="form-control">
+                                    <input type="text" name="stopword" required id="stopword" autocomplete="off" class="form-control">
+                                    <small id="alertStopword"></small>
                                 </div>
                             </div>
                         </div>
@@ -90,7 +94,7 @@
                     <div class="container">
                         <div class="row">
                             <div class="col-lg-12">
-                                <button type="submit" class="btn btn-primary float-right">
+                                <button type="submit" class="btn btn-primary float-right tambah-stopword">
                                     <i class="fa fa-plus-square fa-1x" aria-hidden="true"></i>&nbsp;&nbsp;Tambah</button>
                             </div>
                         </div>
@@ -120,15 +124,11 @@
                                             <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
                                         </button>
                                     </a>
-                                    <a href="<?= base_url('control/deleteStopword/' . $data['id']); ?>" style="text-decoration: none;">
-                                        <button type="button" class="btn btn-danger">
-                                            <i class="fa fa-trash-o" aria-hidden="true"></i>
-                                        </button>
-                                    </a>
+                                    <button type="button" class="btn btn-danger hapus-stopword" id="<?= $data['id']; ?>">
+                                        <i class="fa fa-trash-o" aria-hidden="true"></i>
+                                    </button>
                                 </td>
-
                             </tr>
-
                         <?php endforeach; ?>
                     </tbody>
                 </table>
@@ -183,8 +183,12 @@
             });
         })(jQuery);
     </script>
-
-
+    <script type="text/javascript">
+        var base_url = "<?php echo base_url(); ?>";
+    </script>
+    <!-- SweetAlert2 JS -->
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="<?= base_url('assets/sweetalert2-11.4.8/package/dist/sweetalert2.all.min.js') ?>"></script>
 
 </body>
 
