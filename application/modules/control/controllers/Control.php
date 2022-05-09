@@ -80,6 +80,15 @@
             $this->load->view('control/imbuhan', $data);
         }
     }
+    function checkKataImbuhan()
+    {
+        $kata_imbuhan = $this->input->post('kata_imbuhan');
+        $kata_dasar = $this->input->post('kata_dasar');
+
+        if ($kata_imbuhan != '' && $kata_dasar != '') {
+            $checkKataImbuhan = $this->Control_model->checkKataImbuhan($kata_imbuhan, $kata_dasar);
+        }
+    }
     function addImbuhan()
     {
         if ($this->session->userdata('username')) {
@@ -167,6 +176,38 @@
         if ($hapusStopword == TRUE) {
             $this->session->set_flashdata('berhasil_hapus_stopword', ' ');
             redirect('control/stopwords');
+        }
+    }
+    function skripsi()
+    {
+        if ($this->session->userdata('username')) {
+            $data['title'] = 'Control | Portal Tugas Akhir';
+            $data['allSkripsi'] = $this->Control_model->getAllSkripsi();
+            $data['session_access_user'] = $this->session->userdata('alias');
+            $this->load->view('skripsi', $data);
+        } else {
+            redirect('control/login');
+        }
+    }
+    function dosen()
+    {
+        if ($this->session->userdata('username')) {
+            $data['title'] = 'Control | Referensi Dosen Tugas Akhir';
+            $data['dosen'] = $this->Control_model->getAllDosen();
+            $data['prodi'] = $this->Control_model->getAllProdi();
+            $data['session_access_user'] = $this->session->userdata('alias');
+            $this->load->view('dosen', $data);
+        } else {
+            redirect('control/login');
+        }
+    }
+    function checknip()
+    {
+        $nip = $this->input->post('nip');
+        if ($nip != '') {
+            $this->Control_model->checknip($nip);
+        } else {
+            echo "NIP KOSONG";
         }
     }
 }

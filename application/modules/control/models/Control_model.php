@@ -35,6 +35,15 @@
         $queryGetAllImbuhan = $this->db->get('kata_imbuhan')->result_array();
         return $queryGetAllImbuhan;
     }
+    function checkKataImbuhan($kata_imbuhan, $kata_dasar)
+    {
+        $this->db->select('kata_imbuhan, kata_dasar');
+        $this->db->from('kata_imbuhan');
+        $this->db->where('kata_imbuhan', $kata_imbuhan);
+        $this->db->where('kata_dasar', $kata_dasar);
+        $query = $this->db->get();
+        return $query;
+    }
     function addImbuhan($kata_imbuhan, $kata_dasar)
     {
         $this->db->select('kata_imbuhan, kata_dasar');
@@ -99,5 +108,21 @@
         } else {
             return FALSE;
         }
+    }
+    function getAllSkripsi()
+    {
+    }
+    function getAllDosen()
+    {
+        $this->db->select('*');
+        $this->db->from('dosen');
+        $this->db->join('program_studi', 'program_studi.kd_program_studi = dosen.program_studi');
+        $this->db->order_by('nama', 'ASC');
+        $query = $this->db->get();
+        return $query->result_array();
+    }
+    function getAllProdi()
+    {
+        return $this->db->get('program_studi')->result_array();
     }
 }

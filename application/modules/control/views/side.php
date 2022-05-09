@@ -16,7 +16,7 @@
                 </li>
                 <h3 class="menu-title">KAMPUS</h3><!-- /.menu-title -->
                 <li class="">
-                    <a href="<?= base_url('control/lecture'); ?>" class="dropdown-toggle"> <i class="menu-icon fa fa-users"></i>Dosen</a>
+                    <a href="<?= base_url('control/dosen'); ?>" class="dropdown-toggle"> <i class="menu-icon fa fa-users"></i>Dosen</a>
                 </li>
                 <li class="">
                     <a href="<?= base_url('control/mahasiswa') ?>"> <i class="menu-icon fa fa-users"></i>Mahasiswa</a>
